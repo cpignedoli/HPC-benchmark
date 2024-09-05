@@ -3,21 +3,21 @@
 #n=24  # Fixed value for n
 here=`pwd`/
 # Loop for n  nodes with variable walltime
-for n in  6 8 12 16 24 32
+for n in 4 8 12 16 32
 do
-    if (( n <= 8 )); then
+    if (( n <= 12 )); then
 	mywall=50
     else
-	mywall=20
+	mywall=09
     fi
     # Loop for m from 2 to 72 in steps of 2
-    for m in 1 2 4 6 8 12 16 24 32
+    for (( m=8; m<=72; m+=2 ))
     do
         # Loop for t, t is either 1 or an even number up to 72/m
-        for t in 1 2 4 6 8 12 16 24 32
+        for (( t=1; t<=72/m; t++ ))
         do
             # Print t only if it is 1 or even
-            if (( t<=72/m )); then
+            if (( t == 1 || t % 2 == 0 )); then
                 # Print the values of n, m, and t
         	    dirnow=${here}$(printf "%03d" "$n")_$(printf "%03d" "$m")_$(printf "%03d" "$t")
         	    mkdir ${dirnow}
